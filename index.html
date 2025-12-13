@@ -1430,13 +1430,10 @@
         try {
           const response = await fetch(rsvpForm.action, {
             method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            body: data,
+            mode: 'no-cors'
           });
           
-          const text = await response.text();
           alert('Спасибо! Ваше сообщение отправлено.');
           rsvpForm.reset();
         } catch (error) {
