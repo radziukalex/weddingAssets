@@ -1418,18 +1418,22 @@
           .map(cb => cb.value)
           .join(', ');
         
-        // Собираем данные формы
-        const formData = new URLSearchParams();
-        formData.append('name', document.getElementById('name').value);
-        formData.append('attendance', document.querySelector('input[name="attendance"]:checked').value);
-        formData.append('partner_name', document.getElementById('partner-name').value);
-        formData.append('preferences', selectedPreferences);
-        formData.append('notes', document.getElementById('notes').value);
+        // Собираем данные формы в JSON
+        const data = {
+          name: document.getElementById('name').value,
+          attendance: document.querySelector('input[name="attendance"]:checked').value,
+          partner_name: document.getElementById('partner-name').value,
+          preferences: selectedPreferences,
+          notes: document.getElementById('notes').value
+        };
         
         try {
           const response = await fetch(rsvpForm.action, {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
           });
           
           const text = await response.text();
