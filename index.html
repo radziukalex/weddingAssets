@@ -1256,11 +1256,8 @@
       <div class="rsvp-block">
         <h3>ПОДТВЕРДИТЕ ПРИСУТСТВИЕ</h3>
         <p>Ответ можно изменить позже — просто напишите нам.</p>
-        <!-- FormSubmit: замените EMAIL на свой -->
-        <form action="https://formsubmit.co/radyukalex16@gmail.com" method="POST" id="rsvp-form">
-          <input type="hidden" name="_subject" value="RSVP на свадьбу">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://antonvarenik.github.io/wedding-thank-you/">
+        <!-- Google Apps Script webhook для Telegram -->
+        <form action="https://script.google.com/macros/s/AKfycbwyoW9VW25o8i0unLSrUDNbZ_7uVDv9mNkopRORXFVVIO9FOp2MSl6yuhe6IbJAQU_cBg/exec" method="POST" id="rsvp-form">
           <div class="form-group">
             <label for="name">Имя и фамилия</label>
             <input type="text" id="name" name="name" required placeholder="Имя и фамилия">
