@@ -1295,9 +1295,9 @@
               <label><input type="checkbox" name="preferences" value="Не пью алкоголь"> Не пью алкоголь</label>
             </div>
           </div>
-           <div class="form-group">
-            <label for="name">Комментарий</label>
-            <input type="text" id="name" name="name" placeholder="Аллергии, особые пожелания и все, что важно знать">
+          <div class="form-group">
+            <label for="notes">Комментарий</label>
+            <input type="text" id="notes" name="notes" placeholder="Аллергии, особые пожелания и все, что важно знать">
           </div>
           <button type="submit" class="btn-primary">Отправить</button>
         </form>
@@ -1401,25 +1401,43 @@
     // RSVP form validation and processing
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
-      rsvpForm.addEventListener('submit', (e) => {
+      rsvpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
         const checkboxes = rsvpForm.querySelectorAll('input[name="preferences"]');
         const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+        
         if (!isChecked) {
-          e.preventDefault();
           alert('Пожалуйста, выберите хотя бы одно предпочтение по алкоголю');
-        } else {
-          // Собираем все выбранные предпочтения в одно поле
-          const selectedPreferences = Array.from(checkboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value)
-            .join(', ');
+          return;
+        }
+        
+        // Собираем выбранные предпочтения
+        const selectedPreferences = Array.from(checkboxes)
+          .filter(cb => cb.checked)
+          .map(cb => cb.value)
+          .join(', ');
+        
+        // Собираем данные формы
+        const formData = new URLSearchParams();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('attendance', document.querySelector('input[name="attendance"]:checked').value);
+        formData.append('partner_name', document.getElementById('partner-name').value);
+        formData.append('preferences', selectedPreferences);
+        formData.append('notes', document.getElementById('notes').value);
+        
+        try {
+          const response = await fetch(rsvpForm.action, {
+            method: 'POST',
+            body: formData
+          });
           
-          // Создаём скрытое поле с объединёнными предпочтениями
-          const preferencesInput = document.createElement('input');
-          preferencesInput.type = 'hidden';
-          preferencesInput.name = 'alcohol_preferences';
-          preferencesInput.value = selectedPreferences;
-          rsvpForm.appendChild(preferencesInput);
+          const text = await response.text();
+          alert('Спасибо! Ваше сообщение отправлено.');
+          rsvpForm.reset();
+        } catch (error) {
+          console.error('Ошибка:', error);
+          alert('Ошибка при отправке. Пожалуйста, попробуйте позже.');
         }
       });
     }
