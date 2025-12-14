@@ -1257,7 +1257,9 @@
         <h3>ПОДТВЕРДИТЕ ПРИСУТСТВИЕ</h3>
         <p>Ответ можно изменить позже — просто напишите нам.</p>
         <!-- Google Apps Script webhook для Telegram -->
-        <form action="https://script.google.com/macros/s/AKfycbzfIhMdzge4bNzGEld4Y84KbnUYrjVMkOys-iREbBgUpdqsqLsysIAjI5dVEwF5tst_/exec" method="POST" id="rsvp-form">
+        <form
+          action="https://script.google.com/macros/s/AKfycbzfIhMdzge4bNzGEld4Y84KbnUYrjVMkOys-iREbBgUpdqsqLsysIAjI5dVEwF5tst_/exec"
+          method="POST" id="rsvp-form">
           <div class="form-group">
             <label for="name">Имя и фамилия</label>
             <input type="text" id="name" name="name" required placeholder="Имя и фамилия">
@@ -1403,21 +1405,25 @@
     if (rsvpForm) {
       rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
+        console.log('Форма отправляется...');
+
         const checkboxes = rsvpForm.querySelectorAll('input[name="preferences"]');
         const isChecked = Array.from(checkboxes).some(cb => cb.checked);
-        
+
         if (!isChecked) {
           alert('Пожалуйста, выберите хотя бы одно предпочтение по алкоголю');
           return;
         }
-        
+
         // Собираем выбранные предпочтения
         const selectedPreferences = Array.from(checkboxes)
           .filter(cb => cb.checked)
           .map(cb => cb.value)
           .join(', ');
-        
+
+        console.log('Выбранные предпочтения по алкоголю:', selectedPreferences);
+
         // Собираем данные формы в JSON
         const data = {
           name: document.getElementById('name').value,
@@ -1426,13 +1432,18 @@
           preferences: selectedPreferences,
           notes: document.getElementById('notes').value
         };
-        
+
+        console.log('Данные, отправляемые на сервер:', data);
+
+
         try {
           const response = await fetch(rsvpForm.action, {
             method: 'POST',
             body: data,
             mode: 'no-cors'
           });
+
+          console.log('Ответ от сервера:', response);
           
           alert('Спасибо! Ваше сообщение отправлено.');
           rsvpForm.reset();
