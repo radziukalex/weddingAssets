@@ -1436,12 +1436,26 @@
         console.log('Данные, отправляемые на сервер:', data);
 
 
+        // try {
+        //   const response = await fetch(rsvpForm.action, {
+        //     method: 'POST',
+        //     body: data,
+        //     mode: 'no-cors'
+        //   });
+
         try {
+          // Отправка данных на сервер с правильным JSON
           const response = await fetch(rsvpForm.action, {
             method: 'POST',
-            body: data,
-            mode: 'no-cors'
+            headers: {
+              'Content-Type': 'application/json',  // Указываем, что данные в формате JSON
+            },
+            body: JSON.stringify(data),  // Преобразуем данные в строку JSON
           });
+
+          if (!response.ok) {
+            throw new Error('Ошибка при отправке данных на сервер');
+          }
 
           console.log('Ответ от сервера:', response);
 
