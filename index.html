@@ -112,27 +112,39 @@
       background: #000;
     }
 
-    .scroll-frame video {
+
+    .hero-frame {
+      height: 700px;
+      background: #000;
+    }
+
+    .hero-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      .hero-frame {
+        aspect-ratio: 9 / 16;
+        height: auto;
+      }
+
+      .hero-frame video {
+        object-fit: cover;
+      }
+    }
+
+    /*  .scroll-frame video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
       background: #fffdf9;
-    }
-
-    @media (max-width: 768px) {
-      .scroll-frame {
-        height: 100vh;
-        margin: 0;
-        border-radius: 0;
-      }
-
-      .scroll-frame video {
-        object-fit: cover;
-        object-position: center;
-      }
-    }
+    } */
 
     .scroll-frame img {
       position: absolute;
@@ -930,8 +942,9 @@
       <div class="divider"></div>
       <div class="script names">Alexandr & Alexandra</div>
 
-      <div class="scroll-frame">
-        <video class="hero-video"
+      <!-- HERO VIDEO -->
+      <div class="scroll-frame hero-frame">
+        <video
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/528706A2-E1D8-43E0-9AD0-F36A2B5BF9BB.MP4"
           autoplay muted loop playsinline></video>
       </div>
@@ -939,6 +952,7 @@
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
     </div>
   </section>
+
 
   <!-- SECTION 2: Мы официально станем семьёй -->
   <section>
