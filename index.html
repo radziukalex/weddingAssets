@@ -121,6 +121,19 @@
       background: #fffdf9;
     }
 
+    @media (max-width: 768px) {
+      .scroll-frame {
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .scroll-frame video {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
     .scroll-frame img {
       position: absolute;
       left: 50%;
