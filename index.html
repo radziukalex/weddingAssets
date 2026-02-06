@@ -112,6 +112,15 @@
       background: #000;
     }
 
+    .scroll-frame video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fffdf9;
+    }
+
     .scroll-frame img {
       position: absolute;
       left: 50%;
@@ -908,9 +917,10 @@
       <div class="divider"></div>
       <div class="script names">Alexandr & Alexandra</div>
 
-      <div class="scroll-frame js-scroll-zoom">
-        <!-- ЗАМЕНИ src на своё фото 1200x700 -->
-        <img src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/72.jpg" alt="Мы">
+      <div class="scroll-frame">
+        <video class="hero-video"
+          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/528706A2-E1D8-43E0-9AD0-F36A2B5BF9BB.MP4"
+          autoplay muted loop playsinline></video>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
@@ -1400,65 +1410,6 @@
       update();
     })();
 
-    // RSVP form validation and processing
-    // const rsvpForm = document.getElementById('rsvp-form');
-    // if (rsvpForm) {
-    //   rsvpForm.addEventListener('submit', async (e) => {
-    //     e.preventDefault();
-
-    //     console.log('Форма отправляется...');
-
-    //     const checkboxes = rsvpForm.querySelectorAll('input[name="preferences"]');
-    //     const isChecked = Array.from(checkboxes).some(cb => cb.checked);
-
-    //     if (!isChecked) {
-    //       alert('Пожалуйста, выберите хотя бы одно предпочтение по алкоголю');
-    //       return;
-    //     }
-
-    //     // Собираем выбранные предпочтения
-    //     const selectedPreferences = Array.from(checkboxes)
-    //       .filter(cb => cb.checked)
-    //       .map(cb => cb.value)
-    //       .join(', ');
-
-    //     console.log('Выбранные предпочтения по алкоголю:', selectedPreferences);
-
-    //     // Собираем данные формы в JSON
-    //     const data = {
-    //       name: document.getElementById('name').value,
-    //       attendance: document.querySelector('input[name="attendance"]:checked').value,
-    //       partner_name: document.getElementById('partner-name').value,
-    //       preferences: selectedPreferences,
-    //       notes: document.getElementById('notes').value
-    //     };
-
-    //     console.log('Данные, отправляемые на сервер:', JSON.stringify(data));
-
-    //     try {
-    //       // Отправка данных на сервер с правильным JSON
-    //       const response = await fetch(rsvpForm.action, {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',  // Указываем, что данные в формате JSON
-    //         },
-    //         body: JSON.stringify(data),  // Преобразуем данные в строку JSON
-    //       });
-
-    //       if (!response.ok) {
-    //         throw new Error('Ошибка при отправке данных на сервер');
-    //       }
-
-    //       console.log('Ответ от сервера:', response);
-
-    //       alert('Спасибо! Ваше сообщение отправлено.');
-    //       rsvpForm.reset();
-    //     } catch (error) {
-    //       console.error('Ошибка:', error);
-    //       alert('Ошибка при отправке. Пожалуйста, попробуйте позже.');
-    //     }
-    //   });
-    // }
     const rsvpForm = document.getElementById('rsvp-form');
     if (rsvpForm) {
       rsvpForm.addEventListener('submit', async (e) => {
