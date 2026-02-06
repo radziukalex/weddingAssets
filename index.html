@@ -52,8 +52,13 @@
       color: inherit
     }
 
+    #top {
+      padding: 0;
+      height: 120vh;
+    }
+
     section {
-      padding: 40px 16px;
+      padding: 40px 40px;
       display: flex;
       align-items: flex-start;
       min-height: auto;
@@ -63,6 +68,14 @@
       max-width: 1120px;
       margin: 0 auto;
       width: 100%;
+    }
+
+    #top .inner {
+      padding: 0 !important;
+      /* Убираем отступы внутри секции hero */
+      margin: 0 !important;
+      width: 100%;
+      max-width: 100%;
     }
 
     .center {
@@ -114,26 +127,39 @@
 
 
     .hero-frame {
-      height: 700px;
-      background: #000;
+      margin: 0;
+      position: relative;
+      width: 100%;
+      height: 120vh;
+      padding-bottom: 177.77%;
+      /* Соотношение сторон 9:16 */
+      overflow: hidden;
     }
 
     .hero-frame video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      display: block;
-      background: var(--bg);
+      object-fit: cover;
+      /* Это гарантирует, что видео будет заполнять весь контейнер */
     }
 
+    /* Медиазапрос для мобильных устройств */
     @media (max-width: 768px) {
       .hero-frame {
-        aspect-ratio: 9 / 16;
-        height: auto;
+        padding-bottom: 177.77%;
+        /* сохраняем пропорции 9:16 */
+        height: 0;
+        /* Нет фиксированной высоты, только padding-bottom */
       }
 
       .hero-frame video {
         object-fit: cover;
+        /* Видео будет растягиваться и не деформироваться */
+        width: 100%;
+        height: 100%;
       }
     }
 
