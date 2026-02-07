@@ -1542,19 +1542,24 @@
 
         console.log('Выбранные предпочтения по алкоголю:', selectedPreferences);
 
+        // Получаем параметр guest из URL
+        const guestName = getURLParameter('guest');
+        console.log('Параметр guest:', guestName);
+
         // Собираем данные формы в JSON
         const data = {
           name: document.getElementById('name').value,
           attendance: document.querySelector('input[name="attendance"]:checked').value,
           partner_name: document.getElementById('partner-name').value,
           preferences: selectedPreferences,
-          notes: document.getElementById('notes').value
+          notes: document.getElementById('notes').value,
+          guest: guestName
         };
 
         console.log('Данные, отправляемые на сервер:', JSON.stringify(data));
 
         // Формируем текст для отправки в Telegram
-        const messageText = `🎉 Новое RSVP:\n\n👤 Имя: ${data.name}\n✅ Присутствие: ${data.attendance}\n👥 Спутник: ${data.partner_name || 'не указан'}\n🍷 Алкоголь: ${data.preferences || 'не указано'}\n💬 Комментарий: ${data.notes || 'нет'}`;
+        const messageText = `🎉 Новое RSVP от ${data.guest}:\n\n👤 Имя: ${data.name}\n✅ Присутствие: ${data.attendance}\n👥 Спутник: ${data.partner_name || 'не указан'}\n🍷 Алкоголь: ${data.preferences || 'не указано'}\n💬 Комментарий: ${data.notes || 'нет'}`;
 
         const token = "8534280585:AAFuKXDru1ekP1ok-oij2sxiieB4dRB_5_4"; // Ваш токен бота
         const chatIds = ["567482774", "578837712"]; // Массив chat_id для нескольких пользователей
@@ -1608,16 +1613,21 @@
 
     function getURLParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(name);
+      const paramValue = urlParams.get(name);
+      console.log(`Параметр ${name}: ${paramValue}`); // Выводим параметр
+      return paramValue;
     }
 
     // Функция для персонализации приветствия
     function personalizePage() {
+      console.log('Выполняется функция personalizePage');
       const guestName = getURLParameter('guest'); // Получаем параметр 'guest' из URL
       if (guestName && personalizedMessages[guestName]) {
         // Если параметр есть и для этого гостя есть персонализированное сообщение
         const greetingText = document.getElementById('personalized-greeting');
         const messageText = document.getElementById('personalized-message');
+        greetingText.textContent = personalizedMessages[guestName].greeting;
+        messageText.textContent = personalizedMessages[guestName].message;
 
         // Вставляем персонализированные данные
         greetingText.textContent = personalizedMessages[guestName].greeting;
@@ -1629,11 +1639,17 @@
 
         greetingText.textContent = `Добро пожаловать!`;
         messageText.textContent = `Мы рады видеть вас на нашем самом важном событии.`;
+
+        greetingText.textContent = `Добро пожаловать!`;
+        messageText.textContent = `Мы рады видеть вас на нашем самом важном событии.`;
       }
     }
 
     // Вызов функции, когда страница загружается
-    window.onload = personalizePage;
+    window.onload = function () {
+      console.log('Страница загружена');
+      personalizePage();
+    };
   </script>
 </body>
 
