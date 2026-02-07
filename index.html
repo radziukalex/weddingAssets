@@ -57,6 +57,11 @@
       height: auto;
     }
 
+    #river {
+      padding: 0px 0px;
+      height: auto;
+    }
+
     section {
       padding: 40px 40px;
       display: flex;
@@ -295,6 +300,7 @@
       color: var(--muted);
       font-size: 15px;
       line-height: 1.7;
+      text-align: justify;
     }
 
     /* НАША ИСТОРИЯ */
@@ -443,102 +449,35 @@
 
 
     /* Location */
-    .location-photos {
-      display: grid;
-      grid-template-columns: 0.7fr 1.6fr 0.7fr;
-      /* центр шире, боковые уже */
-      gap: 6px;
-      align-items: center;
-      /* боковые по вертикали по центру */
-      margin-top: 40px;
-      /* отступ до кнопки */
-    }
-
-    /* сама полароид-карточка */
-    .location-card {
-      background: #ffffff;
-      border-radius: 22px;
-      border: 1px solid #eee4d8;
-      /* внешняя рамка */
-      box-shadow: 0 24px 60px rgba(0, 0, 0, .12);
-      padding: 28px 24px 40px;
-      /* белое поле вокруг фото и текста */
-      width: 100%;
-      max-width: 540px;
-      /* чтобы не была узкой "палкой" */
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* боковые фотки */
-    .location-photos .scroll-frame.small {
-      margin: 0;
-      height: 260px;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, .12);
-    }
-
-    /* центральная фотка — большой кадр + внутренняя рамка */
     .location-photos .location-card-photo {
-      border-radius: 18px;
-      overflow: hidden;
-      background: #000;
       margin: 0;
-      box-shadow: none;
-      height: 520px;
-      /* большой размер, как ты хочешь */
-      border: 1px solid #f3e4d2;
-      /* тонкая рамка вокруг фото */
+      max-width: 100%;
+      width: 100vw;
+      height: auto;
+      position: relative;
+      background: #000;
     }
 
-    .location-card-photo img {
+    /* Видео внутри */
+    .location-card-photo video {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .location-card-title {
-      margin-top: 22px;
-      text-align: center;
-      font-family: "AlexBrush-Regular", "Great Vibes", cursive;
-      font-size: 32px;
-    }
-
-    .location-card-address {
-      margin-top: 8px;
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* адаптив для мобилы */
-    @media (max-width: 900px) {
-      .location-photos {
-        grid-template-columns: 1fr;
-        gap: 18px;
-        align-items: stretch;
-        margin-top: 32px;
-        margin-bottom: 24px;
-      }
-
-      .location-photos .scroll-frame,
-      .location-photos .small {
-        height: 220px;
-      }
-
-      .location-card {
-        order: -1;
-        padding: 22px 20px 32px;
-        max-width: none;
-      }
-
+    /* Адаптив для мобильных устройств */
+    @media (max-width: 768px) {
       .location-card-photo {
-        height: 260px;
+        padding-bottom: 177.77%;
+        border-radius: 0px;
+        height: 0;
+        /* Соотношение 16:9 для мобильных */
       }
     }
-
 
     /* Новый тайминг дня в стиле We Meet / We Do / We Party */
     .day-plan {
@@ -1025,7 +964,7 @@
         <!-- Текст приветствия будет подставляться динамически через JavaScript -->
       </div>
       <!-- Подзаголовок с персонализированным сообщением -->
-      <div class="phrase-sub" id="personalized-message">
+      <div id="personalized-message" style="color:var(--muted); font-size:14px; text-align:center;">
         <!-- Сообщение будет подставляться динамически через JavaScript -->
       </div>
     </div>
@@ -1131,35 +1070,19 @@
   </section>
 
   <!-- ЛОКАЦИЯ -->
-  <section>
+  <section id="river">
     <div class="inner fade-in">
       <div class="section-title center">ЛОКАЦИЯ</div>
       <p class="center" style="color:var(--muted);font-size:14px;">Место, где мы скажем друг другу «да».</p>
 
       <div class="location-photos">
-        <div class="scroll-frame small">
-          <img style="transform:translate(-50%,-50%) scale(1.05);"
-            src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/IMG_4727.jpg"
-            alt="Локация 1">
-        </div>
-
+        <!-- Центральная локация -->
         <div class="location-card">
           <div class="scroll-frame js-scroll-zoom location-card-photo">
-            <img src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/IMG_4730.jpg"
-              alt="River Hall">
-          </div>
-          <div class="location-card-title">«River Hall»</div>
-          <div class="location-card-address">
-            Улица Подольная 23, Гродно
+            <video id = "location-card-photo" src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/river.mp4" autoplay
+              loop playsinline mute></video>
           </div>
         </div>
-
-        <div class="scroll-frame small">
-          <img style="transform:translate(-50%,-50%) scale(1.05);"
-            src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/IMG_4731.jpg"
-            alt="Локация 3">
-        </div>
-
       </div>
       <div class="center">
         <a class="btn" href="https://yandex.by/maps/-/CLW0VH~L" target="_blank">Как добраться</a>
