@@ -1001,43 +1001,70 @@
 
       <!-- HERO VIDEO -->
       <div class="scroll-frame hero-frame video-frame">
-        <video
-          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/528706A2-E1D8-43E0-9AD0-F36A2B5BF9BB.MP4"
-          autoplay muted loop playsinline></video>
+        <video id="hero-video"
+          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4"
+          autoplay loop playsinline></video>
       </div>
 
       <!-- Видео для десктопной версии -->
       <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
-        <video src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/shir.mov" autoplay muted
-          loop playsinline></video>
+        <video id="desktop-video"
+          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4"
+          autoplay loop playsinline></video>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
     </div>
   </section>
 
+  <script>
+// Функция для проверки видимости элемента на экране
+function isElementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
 
-  <!-- SECTION 2: Мы официально станем семьёй -->
-  <!-- <section>
-    <div class="inner grid-2">
-      <div class="photo-side fade-in">
-        <div class="scroll-frame js-scroll-zoom">
-          <img src="https://github.com/radziukalex/weddingAssets/blob/main/70.jpg?raw=true" alt="Мы">
-        </div>
-        <div class="photo-vert-label">ALEXANDR & ALEXANDRA</div>
-      </div>
-      <div class="phrase-block fade-in">
-        <div class="phrase-main">
-          <span class="script">Мы</span>
-          <span class="rest js-scale-on-scroll">официально станем семьёй</span>
-        </div>
-        <div class="phrase-sub">
-          Если вы сейчас читаете этот текст, значит совсем скоро вы увидите одного из нас в свадебном платье, и мы
-          думаем, что вы догадываетесь, кого именно…
-        </div>
-      </div>
-    </div>
-  </section> -->
+// Функция для остановки и воспроизведения видео в зависимости от видимости
+function toggleVideoPlayback() {
+  const video = document.getElementById('hero-video'); // Получаем первое видео
+  const desktopVideo = document.getElementById('desktop-video'); // Получаем второе видео
+
+  // Проверка для первого видео
+  if (isElementInViewport(video)) {
+    if (video.paused) {
+      video.play(); // Воспроизведение видео, если оно в области видимости
+    }
+  } else {
+    if (!video.paused) {
+      video.pause(); // Остановка видео, если оно выходит за пределы экрана
+    }
+  }
+
+  // Проверка для второго видео
+  if (isElementInViewport(desktopVideo)) {
+    if (desktopVideo.paused) {
+      desktopVideo.play(); // Воспроизведение видео, если оно в области видимости
+    }
+  } else {
+    if (!desktopVideo.paused) {
+      desktopVideo.pause(); // Остановка видео, если оно выходит за пределы экрана
+    }
+  }
+}
+
+// Добавляем слушатель события прокрутки
+window.addEventListener('scroll', toggleVideoPlayback);
+
+// Проверяем сразу после загрузки страницы
+window.onload = toggleVideoPlayback;
+</script>
+
+  <!-- SECTION 2: Приветствие для гостей -->
   <section>
     <div class="inner center fade-in">
       <!-- Заголовок приветствия -->
