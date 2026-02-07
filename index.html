@@ -225,7 +225,7 @@
 
     @media(max-width:900px) {
       section {
-        padding: 44px 16px
+        padding: 2px 16px
       }
 
       .grid-2 {
@@ -1018,7 +1018,7 @@
 
 
   <!-- SECTION 2: Мы официально станем семьёй -->
-  <section>
+  <!-- <section>
     <div class="inner grid-2">
       <div class="photo-side fade-in">
         <div class="scroll-frame js-scroll-zoom">
@@ -1035,6 +1035,18 @@
           Если вы сейчас читаете этот текст, значит совсем скоро вы увидите одного из нас в свадебном платье, и мы
           думаем, что вы догадываетесь, кого именно…
         </div>
+      </div>
+    </div>
+  </section> -->
+  <section>
+    <div class="inner center fade-in">
+      <!-- Заголовок приветствия -->
+      <div class="phrase-main" id="personalized-greeting">
+        <!-- Текст приветствия будет подставляться динамически через JavaScript -->
+      </div>
+      <!-- Подзаголовок с персонализированным сообщением -->
+      <div class="phrase-sub" id="personalized-message">
+        <!-- Сообщение будет подставляться динамически через JavaScript -->
       </div>
     </div>
   </section>
@@ -1092,10 +1104,10 @@
         <div class="calendar-frame">
           <div class="calendar-month">July</div>
           <div class="calendar-grid">
-            
+
             <!-- строка 1: 1–5 -->
-             <div class="calendar-day"></div>
-             <div class="calendar-day"></div>
+            <div class="calendar-day"></div>
+            <div class="calendar-day"></div>
             <div class="calendar-day">1</div>
             <div class="calendar-day">2</div>
             <div class="calendar-day">3</div>
@@ -1363,6 +1375,10 @@
         <form
           action="https://script.google.com/macros/s/AKfycbwgJl7wQ_fXx9y-KXkJqKuE0xCQQlaF8PLUK3Jv-_GnfBuJHSmfm9n097DiOrWl3kXV/exec"
           method="POST" id="rsvp-form">
+
+          <!-- Скрытое поле для guest-id -->
+          <input type="hidden" id="guest-id" name="guest-id" value="">
+
           <div class="form-group">
             <label for="name">Имя и фамилия</label>
             <input type="text" id="name" name="name" required placeholder="Имя и фамилия">
@@ -1573,6 +1589,51 @@
         }
       });
     }
+
+    const personalizedMessages = {
+      "DaryaMikhail": {
+        greeting: "Привет, Иван!",
+        message: "Мы рады видеть тебя на нашем важнейшем событии! Это будет день, который запомнится на всю жизнь."
+      },
+      "AntonNastya": {
+        greeting: "Добро пожаловать, Мария!",
+        message: "Не можем дождаться, чтобы увидеть тебя в этот особенный день! Ты с нами в сердце."
+      },
+      "Pilutsik": {
+        greeting: "Здравствуй, Алексей!",
+        message: "Скоро встретимся на свадьбе! Это будет потрясающе."
+      }
+      // Добавьте больше персонализированных сообщений по необходимости
+    };
+
+    function getURLParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Функция для персонализации приветствия
+    function personalizePage() {
+      const guestName = getURLParameter('guest'); // Получаем параметр 'guest' из URL
+      if (guestName && personalizedMessages[guestName]) {
+        // Если параметр есть и для этого гостя есть персонализированное сообщение
+        const greetingText = document.getElementById('personalized-greeting');
+        const messageText = document.getElementById('personalized-message');
+
+        // Вставляем персонализированные данные
+        greetingText.textContent = personalizedMessages[guestName].greeting;
+        messageText.textContent = personalizedMessages[guestName].message;
+      } else {
+        // Если гостя нет в константах, показываем общий текст
+        const greetingText = document.getElementById('personalized-greeting');
+        const messageText = document.getElementById('personalized-message');
+
+        greetingText.textContent = `Добро пожаловать!`;
+        messageText.textContent = `Мы рады видеть вас на нашем самом важном событии.`;
+      }
+    }
+
+    // Вызов функции, когда страница загружается
+    window.onload = personalizePage;
   </script>
 </body>
 
