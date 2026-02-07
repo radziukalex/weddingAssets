@@ -53,8 +53,8 @@
     }
 
     #top {
-      padding: 0;
-      height: 120vh;
+      padding: 0px 0px;
+      height: auto;
     }
 
     section {
@@ -65,17 +65,10 @@
     }
 
     .inner {
-      max-width: 1120px;
+      max-width: 100%;
       margin: 0 auto;
       width: 100%;
-    }
-
-    #top .inner {
-      padding: 0 !important;
-      /* Убираем отступы внутри секции hero */
-      margin: 0 !important;
-      width: 100%;
-      max-width: 100%;
+      padding-top: 25px;
     }
 
     .center {
@@ -125,52 +118,90 @@
       background: #000;
     }
 
+    /* .scroll-frame {
+      margin: 0;
+      max-width: 100%;
+      width: 100vw;
+      height: auto;
+      position: relative;
+      background: #000;
+    } */
 
-    .hero-frame {
+    /* .hero-frame {
       margin: 0;
       position: relative;
       width: 100%;
-      height: 120vh;
-      padding-bottom: 177.77%;
-      /* Соотношение сторон 9:16 */
+      height: 0;
       overflow: hidden;
+    } */
+
+    .hero-frame {
+      margin: 0;
+      max-width: 100%;
+      width: 100vw;
+      height: auto;
+      position: relative;
+      background: #000;
     }
 
+    .hero-frame img,
     .hero-frame video {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* Это гарантирует, что видео будет заполнять весь контейнер */
+    }
+
+    .video-frame {
+      display: none;
+    }
+
+    /* Показать картинку только на десктопе */
+    .image-frame {
+      display: block;
     }
 
     /* Медиазапрос для мобильных устройств */
     @media (max-width: 768px) {
       .hero-frame {
         padding-bottom: 177.77%;
-        /* сохраняем пропорции 9:16 */
+        /* Сохраняем пропорции 9:16 */
         height: 0;
-        /* Нет фиксированной высоты, только padding-bottom */
+        /* Без фиксированной высоты */
       }
 
-      .hero-frame video {
-        object-fit: cover;
-        /* Видео будет растягиваться и не деформироваться */
-        width: 100%;
-        height: 100%;
+      /* Скрыть картинку на мобильных устройствах */
+      .image-frame {
+        display: none;
+      }
+
+      /* Показать видео на мобильных устройствах */
+      .video-frame {
+        display: block;
+        border-radius: 0 !important;
+        z-index: -1;
       }
     }
 
-    /*  .scroll-frame video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #fffdf9;
-    } */
+    @media (min-width: 769px) {
+      .hero-frame {
+        padding-bottom: 56.25%;
+        /* Соотношение сторон 16:9 для изображения */
+      }
+
+      /* Картинка будет скрыта на мобильных устройствах, а видео на десктопах */
+      .image-frame {
+        display: block;
+        border-radius: 0 !important;
+      }
+
+      .video-frame {
+        display: none;
+      }
+    }
 
     .scroll-frame img {
       position: absolute;
@@ -969,10 +1000,16 @@
       <div class="script names">Alexandr & Alexandra</div>
 
       <!-- HERO VIDEO -->
-      <div class="scroll-frame hero-frame">
+      <div class="scroll-frame hero-frame video-frame">
         <video
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/528706A2-E1D8-43E0-9AD0-F36A2B5BF9BB.MP4"
           autoplay muted loop playsinline></video>
+      </div>
+
+      <!-- Видео для десктопной версии -->
+      <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
+        <video src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/shir.mov" autoplay muted
+          loop playsinline></video>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
