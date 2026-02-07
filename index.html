@@ -1003,72 +1003,25 @@
       <div class="scroll-frame hero-frame video-frame">
         <video id="hero-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4"
-          autoplay loop playsinline></video>
+          autoplay loop playsinline muted></video>
       </div>
 
       <!-- Видео для десктопной версии -->
       <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
         <video id="desktop-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4"
-          autoplay loop playsinline></video>
+          autoplay loop playsinline muted></video>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
     </div>
   </section>
 
-  <script>
-// Функция для проверки видимости элемента на экране
-function isElementInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
-
-// Функция для остановки и воспроизведения видео в зависимости от видимости
-function toggleVideoPlayback() {
-  const video = document.getElementById('hero-video'); // Получаем первое видео
-  const desktopVideo = document.getElementById('desktop-video'); // Получаем второе видео
-
-  // Проверка для первого видео
-  if (isElementInViewport(video)) {
-    if (video.paused) {
-      video.play(); // Воспроизведение видео, если оно в области видимости
-    }
-  } else {
-    if (!video.paused) {
-      video.pause(); // Остановка видео, если оно выходит за пределы экрана
-    }
-  }
-
-  // Проверка для второго видео
-  if (isElementInViewport(desktopVideo)) {
-    if (desktopVideo.paused) {
-      desktopVideo.play(); // Воспроизведение видео, если оно в области видимости
-    }
-  } else {
-    if (!desktopVideo.paused) {
-      desktopVideo.pause(); // Остановка видео, если оно выходит за пределы экрана
-    }
-  }
-}
-
-// Добавляем слушатель события прокрутки
-window.addEventListener('scroll', toggleVideoPlayback);
-
-// Проверяем сразу после загрузки страницы
-window.onload = toggleVideoPlayback;
-</script>
-
   <!-- SECTION 2: Приветствие для гостей -->
   <section>
     <div class="inner center fade-in">
       <!-- Заголовок приветствия -->
-      <div class="phrase-main" id="personalized-greeting">
+      <div class="section-title" id="personalized-greeting">
         <!-- Текст приветствия будет подставляться динамически через JavaScript -->
       </div>
       <!-- Подзаголовок с персонализированным сообщением -->
@@ -1079,7 +1032,7 @@ window.onload = toggleVideoPlayback;
   </section>
 
   <!-- НАША ИСТОРИЯ -->
-  <section>
+  <!-- <section>
     <div class="inner grid-2">
       <div class="fade-in">
         <div class="section-title">НАША ИСТОРИЯ</div>
@@ -1097,7 +1050,7 @@ window.onload = toggleVideoPlayback;
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- МОМЕНТЫ -->
   <section>
@@ -1368,23 +1321,34 @@ window.onload = toggleVideoPlayback;
     </div>
   </section>
 
-  <!-- КОНТАКТЫ -->
+  <!-- ИНФОРМАЦИЯ -->
   <section>
-    <div class="inner contacts-block fade-in">
-      <div class="section-title">НАШИ КОНТАКТЫ</div>
-      <p>Если у вас есть вопросы по дресс-коду, подаркам, трансферу или просто хочется что-то уточнить — напишите нам.
-      </p>
-      <a class="btn" href="https://t.me/your_telegram_username" target="_blank">Связаться</a>
+    <div class="inner center fade-in">
+      <!-- Заголовок секции -->
+      <div class="section-title">Информация</div>
+      <!-- Подзаголовок с информационным сообщением -->
+      <div class="phrase-sub">
+        Дорогие гости, мы очень хотим, чтобы в этот день вы смогли полностью расслабиться, насладиться атмосферой и ни о
+        чем не заботиться.
+        Формат праздника не предполагает присутствие деток. Пожалуйста, позвольте себе отдохнуть и насладиться
+        праздником в кругу взрослых.
+      </div>
     </div>
   </section>
 
-  <!-- БОЛЬШАЯ ФОТО -->
+  <!-- ДРЕСС КОД -->
   <section>
-    <div class="inner fade-in">
-      <div class="scroll-frame" style="height:480px;">
-        <img style="transform:translate(-50%,-50%) scale(1.05);"
-          src="https://images.pexels.com/photos/1576478/pexels-photo-1576478.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          alt="Мы">
+    <div class="inner center fade-in">
+      <!-- Заголовок секции -->
+      <div class="section-title">ДРЕСС-КОД</div>
+      <!-- Подзаголовок с информационным сообщением -->
+      <div class="phrase-sub">
+        Наша свадьба пройдет в светлой летней атмосфере и нам будет очень приятно, если ваши образы поддержат это
+        настроение.
+        Будем рады спокойным, благородным оттенкам: бежевый, молочный, шампань, серый, пудровый, карамельный и тд.
+        Просим по возможности избегать белого, неоновых цветов и активных принтов.
+        Главное – ощущать себя красиво и комфортно.
+        Будем счастливы провести этот особенный день рядом с вами, до встречи
       </div>
     </div>
   </section>
@@ -1392,12 +1356,11 @@ window.onload = toggleVideoPlayback;
   <!-- RSVP -->
   <section>
     <div class="inner center fade-in">
-      <div class="section-title">БУДЕМ РАДЫ ВАС ВИДЕТЬ</div>
-      <p style="color:var(--muted);font-size:14px;">Пожалуйста, подтвердите ваше присутствие на нашей свадьбе до <b>1
-          мая 2026</b>.</p>
+      <div class="section-title">Пожалуйста, подтвердите ваше присутствие на нашей свадьбе</div>
+      <!-- <p style="color:var(--muted);font-size:14px;">Пожалуйста, подтвердите ваше присутствие на нашей свадьбе до <b>1
+          мая 2026</b>.</p> -->
       <div class="rsvp-block">
-        <h3>ПОДТВЕРДИТЕ ПРИСУТСТВИЕ</h3>
-        <p>Ответ можно изменить позже — просто напишите нам.</p>
+        <!-- <p>Ответ можно изменить позже — просто напишите нам.</p> -->
         <!-- Google Apps Script webhook для Telegram -->
         <form
           action="https://script.google.com/macros/s/AKfycbwgJl7wQ_fXx9y-KXkJqKuE0xCQQlaF8PLUK3Jv-_GnfBuJHSmfm9n097DiOrWl3kXV/exec"
@@ -1502,7 +1465,7 @@ window.onload = toggleVideoPlayback;
     handleScaleText();
 
     // Countdown
-    const targetDate = new Date("2026-06-14T15:00:00+03:00").getTime();
+    const targetDate = new Date("2026-07-09T15:00:00+03:00").getTime();
     function tickCountdown() {
       const now = Date.now();
       let diff = targetDate - now;
@@ -1624,8 +1587,8 @@ window.onload = toggleVideoPlayback;
 
     const personalizedMessages = {
       "DaryaMikhail": {
-        greeting: "Привет, Иван!",
-        message: "Мы рады видеть тебя на нашем важнейшем событии! Это будет день, который запомнится на всю жизнь."
+        greeting: "Дарья и Михаил!",
+        message: "Совсем скоро в нашей жизни случится особенный день — день, когда мы станем семьёй.И нам очень хочется, чтобы рядом были вы 🤍"
       },
       "AntonNastya": {
         greeting: "Добро пожаловать, Мария!",
