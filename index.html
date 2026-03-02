@@ -951,14 +951,14 @@
       <div class="scroll-frame hero-frame video-frame">
         <video id="hero-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4"
-          autoplay loop playsinline muted></video>
+          autoplay loop playsinline></video>
       </div>
 
       <!-- Видео для десктопной версии -->
       <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
         <video id="desktop-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4"
-          autoplay loop playsinline muted></video>
+          autoplay loop playsinline></video>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
@@ -1468,12 +1468,6 @@
         console.log('Форма отправляется...');
 
         const checkboxes = rsvpForm.querySelectorAll('input[name="preferences"]');
-        const isChecked = Array.from(checkboxes).some(cb => cb.checked);
-
-        if (!isChecked) {
-          alert('Пожалуйста, выберите хотя бы одно предпочтение по алкоголю');
-          return;
-        }
 
         // Собираем выбранные предпочтения
         const selectedPreferences = Array.from(checkboxes)
