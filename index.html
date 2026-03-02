@@ -91,6 +91,29 @@
       font-family: "AlexBrush-Regular", regular;
     }
 
+    /* Лоадер */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      /* Прозрачный черный фон */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      /* Убедитесь, что лоадер будет поверх всего контента */
+    }
+
+    #lottie-loader {
+      width: 150px;
+      /* Ширина лоадера */
+      height: 150px;
+      /* Высота лоадера */
+    }
+
     .names {
       font-size: 47px;
       margin-top: 24px;
@@ -969,6 +992,11 @@
 
 <body>
 
+  <!-- Лоадер -->
+  <div id="loader" class="loader">
+    <div id="lottie-loader"></div> <!-- Контейнер для Lottie анимации -->
+  </div>
+
   <!-- HERO -->
   <section id="top">
     <div class="inner center fade-in">
@@ -1425,6 +1453,31 @@
   <footer>© Alexandr & Alexandra • 2026</footer>
 
   <script>
+
+    // Lottie Animation
+    src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js" >
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('loader');
+
+        // Создаем Lottie анимацию
+        const animation = lottie.loadAnimation({
+          container: document.getElementById('lottie-loader'), // Контейнер для анимации
+          renderer: 'svg', // Используем SVG рендер
+          loop: true, // Анимация будет повторяться
+          autoplay: true, // Автозапуск анимации
+          path: 'https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/loader.json' // URL анимации (можете заменить на свой)
+        });
+
+        // Когда все ресурсы страницы загружены
+        window.addEventListener('load', () => {
+          // Скрываем лоадер
+          loader.style.display = 'none';
+        });
+      });
+
+
+    // Видео: автоплей с кнопкой для включения звука и паузой при уходе с экрана
     document.addEventListener("DOMContentLoaded", () => {
       const blocks = document.querySelectorAll(".video-wrap");
 
