@@ -176,35 +176,35 @@
       width: 100px;
       /* Увеличиваем размер кнопки */
       height: 100px;
-      /* Можно сделать квадратной или прямоугольной */
       border: none;
-      background: rgba(0, 0, 0, 0.45);
-      /* Полупрозрачный чёрный фон */
+      background: transparent;
+      /* Убираем темный фон */
       color: white;
-      font-size: 32px;
-      /* Сделаем текст большим */
+      /* Цвет иконки */
+      font-size: 48px;
+      /* Увеличиваем размер иконки */
       line-height: 1;
       display: grid;
       place-items: center;
       cursor: pointer;
       border-radius: 50%;
-      /* Если хочешь оставить кнопку круглой */
-
-      transition: background .15s ease, transform .15s ease;
-      opacity: 1;
-      pointer-events: auto;
+      /* Оставляем, если хотим кнопку круглой */
+      opacity: 0.8;
+      /* Полупрозрачная кнопка */
+      transition: background .15s ease, transform .15s ease, opacity .15s ease;
     }
 
     .video-play:hover {
       transform: scale(1.05);
       /* Немного увеличиваем на hover */
-      background: rgba(0, 0, 0, 0.55);
-      /* Слегка тёмнее на hover */
+      opacity: 1;
+      /* Кнопка становится полностью видимой на hover */
     }
 
     .video-play.hidden {
       opacity: 0;
       pointer-events: none;
+      /* Скрыть кнопку */
     }
 
     /* Показать картинку только на десктопе */
