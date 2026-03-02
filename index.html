@@ -1583,13 +1583,13 @@
 
         const checkboxes = rsvpForm.querySelectorAll('input[name="preferences"]');
 
-        // Собираем выбранные предпочтения
-        const selectedPreferences = Array.from(checkboxes)
-          .filter(cb => cb.checked)
-          .map(cb => cb.value)
-          .join(', ');
+        // // Собираем выбранные предпочтения
+        // const selectedPreferences = Array.from(checkboxes)
+        //   .filter(cb => cb.checked)
+        //   .map(cb => cb.value)
+        //   .join(', ');
 
-        console.log('Выбранные предпочтения по алкоголю:', selectedPreferences);
+        // console.log('Выбранные предпочтения по алкоголю:', selectedPreferences);
 
         // Получаем параметр guest из URL
         const guestName = getURLParameter('guest');
@@ -1600,7 +1600,6 @@
           name: document.getElementById('name').value,
           attendance: document.querySelector('input[name="attendance"]:checked').value,
           partner_name: document.getElementById('partner-name').value,
-          preferences: selectedPreferences,
           notes: document.getElementById('notes').value,
           guest: guestName
         };
@@ -1608,7 +1607,7 @@
         console.log('Данные, отправляемые на сервер:', JSON.stringify(data));
 
         // Формируем текст для отправки в Telegram
-        const messageText = `🎉 Новое RSVP от ${data.guest}:\n\n👤 Имя: ${data.name}\n✅ Присутствие: ${data.attendance}\n👥 Спутник: ${data.partner_name || 'не указан'}\n🍷 Алкоголь: ${data.preferences || 'не указано'}\n💬 Комментарий: ${data.notes || 'нет'}`;
+        const messageText = `🎉 Новое RSVP от ${data.guest}:\n\n👤 Имя: ${data.name}\n✅ Присутствие: ${data.attendance}\n👥 Спутник: ${data.partner_name || 'не указан'}\n💬 Комментарий: ${data.notes || 'нет'}`;
 
         const token = "8534280585:AAFuKXDru1ekP1ok-oij2sxiieB4dRB_5_4"; // Ваш токен бота
         const chatIds = ["567482774", "578837712"]; // Массив chat_id для нескольких пользователей
