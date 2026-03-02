@@ -164,6 +164,49 @@
       display: none;
     }
 
+    /* Видео кнопка плей */
+    .video-wrap {
+      position: relative;
+    }
+
+    .video-play {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100px;
+      /* Увеличиваем размер кнопки */
+      height: 100px;
+      /* Можно сделать квадратной или прямоугольной */
+      border: none;
+      background: rgba(0, 0, 0, 0.45);
+      /* Полупрозрачный чёрный фон */
+      color: white;
+      font-size: 32px;
+      /* Сделаем текст большим */
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      border-radius: 50%;
+      /* Если хочешь оставить кнопку круглой */
+
+      transition: background .15s ease, transform .15s ease;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .video-play:hover {
+      transform: scale(1.05);
+      /* Немного увеличиваем на hover */
+      background: rgba(0, 0, 0, 0.55);
+      /* Слегка тёмнее на hover */
+    }
+
+    .video-play.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* Показать картинку только на десктопе */
     .image-frame {
       display: block;
@@ -826,20 +869,6 @@
       /* жирный шрифт */
     }
 
-    .alcohol-preferences {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: space-between;
-    }
-
-    .alcohol-preferences .form-inline-options {
-      display: flex;
-      flex-direction: column;
-      /* вертикальное выравнивание */
-      gap: 10px;
-    }
-
     .form-inline-options {
       display: flex;
       flex-direction: column;
@@ -948,17 +977,38 @@
       <div class="script names">Alexandr & Alexandra</div>
 
       <!-- HERO VIDEO -->
-      <div class="scroll-frame hero-frame video-frame">
+      <!-- <div class="scroll-frame hero-frame video-frame">
         <video id="hero-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4"
           autoplay loop playsinline></video>
-      </div>
+      </div> -->
 
       <!-- Видео для десктопной версии -->
-      <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
+      <!-- <div class="scroll-frame js-scroll-zoom hero-frame image-frame">
         <video id="desktop-video"
           src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4"
           autoplay loop playsinline></video>
+      </div> -->
+      <!-- HERO VIDEO -->
+      <div class="scroll-frame hero-frame video-frame video-wrap">
+        <video id="hero-video"
+          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4"
+          loop playsinline preload="metadata"></video>
+
+        <button class="video-play" type="button" aria-label="Play video">
+          ▶
+        </button>
+      </div>
+
+      <!-- DESKTOP VIDEO -->
+      <div class="scroll-frame js-scroll-zoom hero-frame image-frame video-wrap">
+        <video id="desktop-video"
+          src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4"
+          loop playsinline preload="metadata"></video>
+
+        <button class="video-play" type="button" aria-label="Play video">
+          ▶
+        </button>
       </div>
 
       <div class="hero-date">09 · 07 · 2026 | 15:00</div>
@@ -1087,10 +1137,14 @@
       <div class="location-photos">
         <!-- Центральная локация -->
         <div class="location-card">
-          <div class="scroll-frame js-scroll-zoom location-card-photo">
+          <div class="scroll-frame js-scroll-zoom location-card-photo video-wrap">
             <video id="location-card-photo"
-              src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/river.mp4" autoplay loop
-              playsinline muted></video>
+              src="https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/river.mp4" loop
+              playsinline perload="metadata"></video>
+
+            <button class="video-play" type="button" aria-label="Play video">
+              ▶
+            </button>
           </div>
         </div>
       </div>
@@ -1371,6 +1425,66 @@
   <footer>© Alexandr & Alexandra • 2026</footer>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const blocks = document.querySelectorAll(".video-wrap");
+
+      blocks.forEach(block => {
+        const video = block.querySelector("video");
+        const btn = block.querySelector(".video-play");
+
+        // Разрешение на воспроизведение со звуком — только после клика
+        let userEnabled = false;
+        let inFocus = false;
+
+        // На iOS часто нужно явно снять muted и выставить volume после взаимодействия
+        function playWithSound() {
+          userEnabled = true;
+          btn.classList.add("hidden");
+
+          try {
+            video.muted = false;
+            video.volume = 1;
+          } catch (e) { }
+
+          // Играть можно только если видео сейчас в фокусе
+          if (inFocus) {
+            video.play().catch(() => {
+              // если браузер всё же заблокировал — вернём кнопку
+              userEnabled = false;
+              btn.classList.remove("hidden");
+            });
+          }
+        }
+
+        btn.addEventListener("click", playWithSound);
+
+        // Если пользователь сам поставил на паузу — покажем кнопку снова
+        video.addEventListener("pause", () => {
+          // если пауза из-за ухода с экрана — кнопка и так покажется ниже
+          if (inFocus) btn.classList.remove("hidden");
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            inFocus = entry.intersectionRatio >= 0.3;
+
+            if (!inFocus) {
+              // Ушло с экрана: стоп и требуем новое нажатие play
+              video.pause();
+              userEnabled = false;
+              btn.classList.remove("hidden");
+            } else {
+              // Вернулось в фокус: НЕ запускаем автоматически
+              // (только по кнопке)
+              if (!userEnabled) btn.classList.remove("hidden");
+            }
+          });
+        }, { threshold: [0, 0.3, 1] });
+
+        observer.observe(video);
+      });
+    });
+
     // Fade-in observer (slide-up between sections)
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
