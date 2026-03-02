@@ -112,6 +112,8 @@
       /* Ширина лоадера */
       height: 150px;
       /* Высота лоадера */
+      z-index: 10000;
+      /* Убедитесь, что анимация будет на переднем плане */
     }
 
     .names {
@@ -997,6 +999,30 @@
     <div id="lottie-loader"></div> <!-- Контейнер для Lottie анимации -->
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js"></script>
+
+  <script>
+    // Когда документ будет полностью загружен
+    document.addEventListener('DOMContentLoaded', () => {
+      const loader = document.getElementById('loader');
+
+      // Создаем Lottie анимацию
+      const animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-loader'), // Контейнер для Lottie анимации
+        renderer: 'svg', // Используем SVG рендер
+        loop: true, // Анимация будет повторяться
+        autoplay: true, // Автозапуск анимации
+        path: 'https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/loader.json' // URL анимации
+      });
+
+      // Когда все ресурсы страницы загружены
+      window.addEventListener('load', () => {
+        // Скрываем лоадер после загрузки страницы
+        loader.style.display = 'none';
+      });
+    });
+  </script>
+
   <!-- HERO -->
   <section id="top">
     <div class="inner center fade-in">
@@ -1453,30 +1479,6 @@
   <footer>© Alexandr & Alexandra • 2026</footer>
 
   <script>
-
-    // Lottie Animation
-    src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js" >
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const loader = document.getElementById('loader');
-
-        // Создаем Lottie анимацию
-        const animation = lottie.loadAnimation({
-          container: document.getElementById('lottie-loader'), // Контейнер для анимации
-          renderer: 'svg', // Используем SVG рендер
-          loop: true, // Анимация будет повторяться
-          autoplay: true, // Автозапуск анимации
-          path: 'https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/loader.json' // URL анимации (можете заменить на свой)
-        });
-
-        // Когда все ресурсы страницы загружены
-        window.addEventListener('load', () => {
-          // Скрываем лоадер
-          loader.style.display = 'none';
-        });
-      });
-
-
     // Видео: автоплей с кнопкой для включения звука и паузой при уходе с экрана
     document.addEventListener("DOMContentLoaded", () => {
       const blocks = document.querySelectorAll(".video-wrap");
