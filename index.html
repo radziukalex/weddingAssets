@@ -42,6 +42,52 @@
       font-style: normal;
     }
 
+    @font-face {
+      font-family: "CormorantGaramond";
+      src: url("CormorantGaramond-Italic-VariableFont_wght.ttf") format("truetype");
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    @font-face {
+      font-family: "CormorantGaramond";
+      src: url("CormorantGaramond-Italic-VariableFont_wght.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    /* Regular 400 */
+    @font-face {
+      font-family: "PlayfairDisplay";
+      src: url("PlayfairDisplay-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* Italic 400 */
+    @font-face {
+      font-family: "PlayfairDisplay";
+      src: url("PlayfairDisplay-Italic.ttf") format("truetype");
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* Bold 700 */
+    @font-face {
+      font-family: "PlayfairDisplay";
+      src: url("PlayfairDisplay-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    /* Bold Italic 700 */
+    @font-face {
+      font-family: "PlayfairDisplay";
+      src: url("PlayfairDisplay-BoldItalic.ttf") format("truetype");
+      font-weight: 700;
+      font-style: italic;
+    }
+
     img {
       max-width: 100%;
       display: block
@@ -436,7 +482,7 @@
 
     .calendar-frame {
       border: 1px solid #d3d3d3;
-      border-radius: 4px;
+      border-radius: 12px;
       padding: 40px 32px 32px;
       background: #fdfdfd;
     }
@@ -556,150 +602,83 @@
       }
     }
 
-    /* Новый тайминг дня в стиле We Meet / We Do / We Party */
-    .day-plan {
-      margin-top: 40px;
-      position: relative;
-      max-width: 760px;
-      margin-left: auto;
-      margin-right: auto;
-      transform: translateX(-40px);
-      /* центрируем весь блок в секции */
+    .timeline {
+      max-width: 640px;
+      margin: 40px auto 0;
+      padding: 0 8px
     }
 
-    /* одна сплошная вертикальная линия по центру тайминга */
-    .day-plan::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: var(--accent-soft);
-      transform: translateX(-50%);
+    .timeline-subtitle {
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    /* строка: слева время, справа — иконка + текст */
-    .day-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      /* левая и правая половины */
-      column-gap: 40px;
-      align-items: center;
-      padding: 20px 0;
-    }
-
-    .day-time {
-      font-family: "AlexBrush-Regular", "Great Vibes", cursive;
-      font-size: 26px;
-      font-weight: 400;
-      text-align: right;
-      /* прижимаем к линии */
-      padding-right: 16px;
-    }
-
-    /* правый блок */
-    .day-item {
+    .timeline-row {
       display: flex;
-      align-items: center;
-      gap: 24px;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--divider);
+      gap: 20px;
     }
 
-    .day-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
-      border: 1px solid var(--divider);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .timeline-row:last-child {
+      border-bottom: none;
     }
 
-    .day-icon svg {
-      width: 32px;
-      height: 32px;
+    .timeline-text {
+      max-width: 420px;
     }
 
-    .day-item-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .timeline-title {
+      font-family: "CormorantGaramond", serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 32px;
     }
 
-    .day-script {
-      font-family: "AlexBrush-Regular", "Great Vibes", cursive;
-      font-size: 34px;
-      margin: 0 0 4px;
+    .timeline-time {
+      font-family: "CormorantGaramond", serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 32px;
+      margin-top: -8px;
     }
 
-    .day-underline {
-      width: 190px;
-      height: 1px;
-      background: #4a4a4a;
-      margin: 0 0 4px;
-      position: relative;
-      top: -6px;
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
     }
 
-    .day-item-caption {
-      font-size: 16px;
-      color: var(--text);
-      margin: 0;
+    .date-title {
+      font-family: "CormorantGaramond", serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 32px;
     }
 
-    /* адаптив тайминга */
-    @media (max-width: 700px) {
-      .day-plan {
-        margin-top: 32px;
-        max-width: 100%;
+    @media (max-width:700px) {
+
+      .timeline-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
       }
 
-      .day-row {
-        grid-template-columns: 1fr;
-        /* стекаем в одну колонку */
-        row-gap: 12px;
-        padding: 18px 0;
+      .timeline-text {
+        max-width: 75%;
       }
 
-      .day-plan::before {
-        left: 24px;
-        /* линия уходит под время слева */
-        transform: none;
-      }
-
-      .day-time {
-        text-align: left;
-        padding-right: 0;
-        padding-left: 36px;
-        font-size: 20px;
-      }
-
-      .day-item {
-        margin-left: 36px;
-      }
-
-      .day-script {
+      .timeline-title {
         font-size: 26px;
       }
 
-      .day-underline {
-        width: 150px;
+      .timeline-time {
+        font-size: 32px;
+        text-align: right;
       }
 
-      .day-icon {
-        width: 48px;
-        height: 48px;
-      }
-
-      .day-icon svg {
-        width: 28px;
-        height: 28px;
-      }
-    }
-
-    /* если остались .day-line в HTML — просто скрываем */
-    .day-line {
-      display: none;
     }
 
     /* Countdown — крупный */
@@ -1211,85 +1190,43 @@
   <!-- ТАЙМИНГ ДНЯ -->
   <section>
     <div class="inner fade-in">
-      <div class="section-title center">ТАЙМИНГ ДНЯ</div>
-      <p class="center" style="color:var(--muted);font-size:14px;">
-        Чтобы вы могли спланировать своё время.
-      </p>
 
-      <div class="day-plan">
-        <!-- 1. Сбор гостей 14:00 -->
-        <div class="day-row">
-          <div class="day-time">14:00</div>
-          <div class="day-item">
-            <div class="day-icon">
-              <!-- временный SVG, потом подменишь -->
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="8" fill="none" stroke="#555" stroke-width="1.5" />
-                <circle cx="12" cy="12" r="3" fill="none" stroke="#555" stroke-width="1.5" />
-              </svg>
-            </div>
-            <div class="day-item-text">
-              <div class="day-script">We Meet</div>
-              <div class="day-underline"></div>
-              <div class="day-item-caption">Сбор гостей</div>
-            </div>
+      <div class="section-title center date-title">09/07/2026</div>
+
+      <div class="timeline">
+
+        <div class="timeline-row">
+          <div class="timeline-text">
+            <div class="timeline-title">WELCOME</div>
+            <div class="timeline-desc">Сбор гостей,<br> закуски с апперитивом</div>
           </div>
+          <div class="timeline-time">14:00</div>
         </div>
 
-        <!-- 2. Церемония 15:00 -->
-        <div class="day-row">
-          <div class="day-time">15:00</div>
-          <div class="day-item">
-            <div class="day-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="9" cy="12" r="5" fill="none" stroke="#555" stroke-width="1.5" />
-                <circle cx="15" cy="12" r="5" fill="none" stroke="#555" stroke-width="1.5" />
-              </svg>
-            </div>
-            <div class="day-item-text">
-              <div class="day-script">We Do</div>
-              <div class="day-underline"></div>
-              <div class="day-item-caption">Церемония регистрации</div>
-            </div>
+        <div class="timeline-row">
+          <div class="timeline-text">
+            <div class="timeline-title">CEREMONY</div>
+            <div class="timeline-desc">Церемония бракосочетания</div>
           </div>
+          <div class="timeline-time">15:00</div>
         </div>
 
-        <!-- 3. Начало банкета 15:30 -->
-        <div class="day-row">
-          <div class="day-time">15:30</div>
-          <div class="day-item">
-            <div class="day-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 15h16" fill="none" stroke="#555" stroke-width="1.5" />
-                <path d="M6 15a6 6 0 0 1 12 0" fill="none" stroke="#555" stroke-width="1.5" />
-                <circle cx="18" cy="6" r="1" fill="#555" />
-              </svg>
-            </div>
-            <div class="day-item-text">
-              <div class="day-script">We Party</div>
-              <div class="day-underline"></div>
-              <div class="day-item-caption">Начало банкета</div>
-            </div>
+        <div class="timeline-row">
+          <div class="timeline-text">
+            <div class="timeline-title">PARTY</div>
+            <div class="timeline-desc">Ужин, поздравления и танцы</div>
           </div>
+          <div class="timeline-time">16:00</div>
         </div>
 
-        <!-- 4. Завершение 23:00 -->
-        <div class="day-row">
-          <div class="day-time">23:00</div>
-          <div class="day-item">
-            <div class="day-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="8" fill="none" stroke="#555" stroke-width="1.5" />
-                <path d="M12 8v4l3 2" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" />
-              </svg>
-            </div>
-            <div class="day-item-text">
-              <div class="day-script">We Close</div>
-              <div class="day-underline"></div>
-              <div class="day-item-caption">Завершение вечера</div>
-            </div>
+        <div class="timeline-row">
+          <div class="timeline-text">
+            <div class="timeline-title">FINAL</div>
+            <div class="timeline-desc">Яркое завершение вечера</div>
           </div>
+          <div class="timeline-time">23:00</div>
         </div>
+
       </div>
     </div>
   </section>
