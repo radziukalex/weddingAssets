@@ -970,6 +970,11 @@
     .btn:hover {
       background: var(--accent-soft);
     }
+
+    .no-scroll {
+      overflow: hidden;
+      height: 100vh;
+    }
   </style>
 </head>
 
@@ -983,23 +988,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js"></script>
 
   <script>
-    // Когда документ будет полностью загружен
     document.addEventListener('DOMContentLoaded', () => {
       const loader = document.getElementById('loader');
 
-      // Создаем Lottie анимацию
+      // запрещаем скролл
+      document.body.classList.add('no-scroll');
+
       const animation = lottie.loadAnimation({
-        container: document.getElementById('lottie-loader'), // Контейнер для Lottie анимации
-        renderer: 'svg', // Используем SVG рендер
-        loop: true, // Анимация будет повторяться
-        autoplay: true, // Автозапуск анимации
-        path: 'https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/main/loader.json' // URL анимации
+        container: document.getElementById('lottie-loader'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/loader.json'
       });
 
-      // Когда все ресурсы страницы загружены
       window.addEventListener('load', () => {
-        // Скрываем лоадер после загрузки страницы
         loader.style.display = 'none';
+
+        // возвращаем скролл
+        document.body.classList.remove('no-scroll');
       });
     });
   </script>
@@ -1026,9 +1033,8 @@
       </div> -->
       <!-- HERO VIDEO -->
       <div class="scroll-frame hero-frame video-frame video-wrap">
-        <video id="hero-video"
-          src="/assets/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4" type="video/mp4"
-          loop playsinline preload="metadata"></video>
+        <video id="hero-video" src="/assets/A6B38998-26DF-4630-A3BD-E7C78EBC5976 (1).mp4" type="video/mp4" loop
+          playsinline preload="metadata"></video>
 
         <button class="video-play" type="button" aria-label="Play video">
           ▶
@@ -1037,9 +1043,8 @@
 
       <!-- DESKTOP VIDEO -->
       <div class="scroll-frame js-scroll-zoom hero-frame image-frame video-wrap">
-        <video id="desktop-video"
-          src="/assets/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4" type="video/mp4"
-          loop playsinline preload="metadata"></video>
+        <video id="desktop-video" src="/assets/copy_50504FC7-D976-4C8F-A920-5E7AD0E92B35.mp4" type="video/mp4" loop
+          playsinline preload="metadata"></video>
 
         <button class="video-play" type="button" aria-label="Play video">
           ▶
@@ -1091,17 +1096,17 @@
       <div class="moments-grid">
         <!-- Заменишь src на свои фото -->
         <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/103.JPEG?raw=true" alt=""></div>
+            src="/assets/103.jpeg" alt=""></div>
         <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/124.JPEG?raw=true" alt=""></div>
+            src="/assets/124.jpeg" alt=""></div>
+        <div class="moment"><img 
+          src="/assets/72.jpg" alt=""></div>
         <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/72.jpg?raw=true" alt=""></div>
-        <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/120.JPEG?raw=true" alt=""></div>
-        <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/44.jpg?raw=true" alt=""></div>
-        <div class="moment"><img
-            src="https://github.com/radziukalex/weddingAssets/blob/develop/Assets/81.JPG?raw=true" alt=""></div>
+            src="/assets/120.jpeg" alt=""></div>
+        <div class="moment"><img 
+          src="/assets/44.jpg" alt=""></div>
+        <div class="moment"><img 
+          src="/assets/81.jpg" alt=""></div>
       </div>
     </div>
   </section>
@@ -1171,9 +1176,8 @@
         <!-- Центральная локация -->
         <div class="location-card">
           <div class="scroll-frame js-scroll-zoom location-card-photo video-wrap">
-            <video id="location-card-photo"
-              src="/assets/river.mp4" type="video/mp4" loop
-              playsinline perload="metadata"></video>
+            <video id="location-card-photo" src="/assets/river.mp4" type="video/mp4" loop playsinline
+              perload="metadata"></video>
 
             <button class="video-play" type="button" aria-label="Play video">
               ▶
