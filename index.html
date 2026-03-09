@@ -521,9 +521,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -48%);
-      width: 40px;
-      height: 40px;
-      background-image: url("https://raw.githubusercontent.com/radziukalex/weddingAssets/c547b5d63ff1aea48400bfc0bf19ef694fd20be4/heart4-svgrepo-com%20(1).svg");
+      width: 60px;
+      height: 60px;
+      background-image: url("https://raw.githubusercontent.com/radziukalex/weddingAssets/refs/heads/develop/Assets/bb10b0aa-4032-4feb-9f3b-1c48e55eb96f.jpg");
       background-size: contain;
       background-repeat: no-repeat;
       pointer-events: none;
@@ -681,39 +681,41 @@
 
     }
 
-    /* Countdown — крупный */
-    .countdown {
+    /* Основная строка countdown */
+    .countdown-inline {
       display: flex;
       justify-content: center;
       gap: 24px;
-      margin-top: 32px;
+      /* расстояние между цифрами */
+      margin-top: 24px;
       flex-wrap: wrap;
     }
 
-    .count-box {
-      min-width: 120px;
-      border-radius: 20px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-      padding: 20px 16px;
-      text-align: center;
+    /* Каждый элемент — цифра + подпись */
+    .count-item {
+      display: flex;
+      flex-direction: column;
+      /* цифра сверху, подпись снизу */
+      align-items: center;
       font-variant-numeric: tabular-nums;
+      font-family: 'CormorantGaramond', serif;
+      /* для цифр и дней */
     }
 
-    .count-box b {
-      display: block;
+    /* Цифры */
+    .count-item b {
       font-size: 36px;
+      font-weight: 700;
+      display: block;
+      font-family: 'CormorantGaramond', serif;
     }
 
-    /* подписи "дней / часов..." скриптовым шрифтом */
-    .count-label {
-      display: block;
-      margin-top: 6px;
-      font-family: "AlexBrush-Regular", "Great Vibes", cursive;
+    /* Подписи под цифрами */
+    .count-item span {
+      margin-top: 4px;
       font-size: 20px;
-      text-transform: none;
-      letter-spacing: 0;
       color: var(--muted);
+      font-family: 'CormorantGaramond', serif;
     }
 
     /* Wishes slider */
@@ -934,11 +936,11 @@
 
     /* enhanced slide-up fade-in */
     .fade-in {
-      opacity: 0;
+      opacity: 0.1;
       transform: translateY(36px);
       transition:
-        opacity .8s cubic-bezier(.18, .88, .24, 1),
-        transform .8s cubic-bezier(.18, .88, .24, 1);
+        opacity 1.2s cubic-bezier(.18, .88, .24, 1),
+        transform 1.2s cubic-bezier(.18, .88, .24, 1);
       will-change: opacity, transform;
     }
 
@@ -1235,65 +1237,22 @@
   <section>
     <div class="inner center fade-in">
       <div class="section-title">ДО НАШЕЙ СВАДЬБЫ ОСТАЛОСЬ:</div>
-      <div class="countdown" id="countdown">
-        <div class="count-box">
+      <div class="countdown-inline" id="countdown">
+        <div class="count-item">
           <b id="cd-days">—</b>
-          <span class="count-label">дней</span>
+          <span>дней</span>
         </div>
-        <div class="count-box">
+        <div class="count-item">
           <b id="cd-hours">—</b>
-          <span class="count-label">часов</span>
+          <span>часов</span>
         </div>
-        <div class="count-box">
+        <div class="count-item">
           <b id="cd-minutes">—</b>
-          <span class="count-label">минут</span>
+          <span>минут</span>
         </div>
-        <div class="count-box">
+        <div class="count-item">
           <b id="cd-seconds">—</b>
-          <span class="count-label">секунд</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ПОЖЕЛАНИЯ -->
-  <section>
-    <div class="inner center fade-in">
-      <div class="section-title">ПОЖЕЛАНИЯ</div>
-      <p style="color:var(--muted);font-size:14px;">Немного слов от нас для вас.</p>
-      <div class="wishes-wrapper" id="wishes">
-        <div class="wishes-viewport">
-          <div class="wishes-track">
-            <div class="wish-card">
-              <div class="wish-text">
-                Мы невероятно счастливы, что этот день мы разделим именно с вами. Спасибо за любовь, поддержку и за то,
-                что были рядом на самых важных этапах нашей истории.
-              </div>
-              <div class="wish-author">Alexandr & Alexandra</div>
-            </div>
-            <div class="wish-card">
-              <div class="wish-text">
-                Пусть этот вечер станет не только нашим праздником, но и вашим. Танцуйте, смейтесь, фотографируйтесь и
-                чувствуйте себя дома — это день нашей большой семьи.
-              </div>
-              <div class="wish-author">С любовью</div>
-            </div>
-            <div class="wish-card">
-              <div class="wish-text">
-                Если вы здесь — значит, вы занимаете особое место в наших сердцах. Надеемся, что спустя годы, вспоминая
-                эту дату, вы будете улыбаться так же широко, как и мы.
-              </div>
-              <div class="wish-author">Ваши будущие молодожёны</div>
-            </div>
-          </div>
-        </div>
-        <div class="wishes-nav">
-          <div class="wishes-buttons">
-            <button class="circle-btn" type="button" data-dir="prev">‹</button>
-            <button class="circle-btn" type="button" data-dir="next">›</button>
-          </div>
-          <div class="wishes-counter"><span id="wish-current">1</span> / <span id="wish-total">3</span></div>
+          <span>секунд</span>
         </div>
       </div>
     </div>
@@ -1485,7 +1444,7 @@
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.2 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // Scroll zoom for images: изначально scale 1.2, при скролле к верху -> 1.0
